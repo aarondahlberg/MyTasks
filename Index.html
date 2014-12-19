@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="myApp">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+    <script src="Controller.js"></script>
+</head>
+<style type="text/css">
+    body {
+        background-color: SlateGray;
+    }
+
+    h1 {
+        color: RoyalBlue;
+        font-size: 50px;
+        font-family: Comic Sans, Comic Sans MS, cursive;
+    }
+
+    #font {
+        font-family: Comic Sans, Comic Sans MS, cursive;
+        color: RoyalBlue;
+    }
+
+    #task {
+        font-family: Comic Sans, Comic Sans MS, cursive;
+    }
+
+    #middle {
+        height: 200px;
+        width: 400px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -100px;
+        margin-left: -200px;
+    }
+
+    #fancybutton {
+        font-family: Comic Sans, Comic Sans MS, cursive;
+        background: #34696f;
+        border: 2px solid rgba(33, 68, 72, 0.59);
+        background: -webkit-linear-gradient(top, #34696f, #2f5f63);
+        background: -moz-linear-gradient(top, #34696f, #2f5f63);
+        background: -o-linear-gradient(top, #34696f, #2f5f63);
+        background: -ms-linear-gradient(top, #34696f, #2f5f63);
+        background: linear-gradient(top, #34696f, #2f5f63);
+        -webkit-border-radius: 50px;
+        -khtml-border-radius: 50px;
+        -moz-border-radius: 50px;
+        border-radius: 50px;
+        -webkit-box-shadow: 0 8px 0 #1b383b;
+        -moz-box-shadow: 0 8px 0 #1b383b;
+        box-shadow: 0 8px 0 #1b383b;
+        text-shadow: 0 2px 2px rgba(255, 255, 255, 0.2);
+    }
+</style>
+<body>
+    <div data-ng-controller="MainCtrl" id="middle">
+        <h1> My Tasks:</h1>
+        <div data-ng-hide="editorEnabled">
+            <form>
+                <input type="text" ng-model="formTaskText" />
+                <button class="btn" id="fancybutton" ng-click="addTask()">Add Task</button>
+            </form>
+        </div>
+        <div data-ng-show="editorEnabled" id="font">
+            Edit Task: 
+            <form>
+                <input type="text" ng-model="formTaskText" />
+                <button class="btn" id="fancybutton" ng-click="editTask()">Save</button>
+                <button class="btn" id="fancybutton" ng-click="disableEditor()">Cancel</button>
+            </form>
+        </div>
+       
+        <ul id="task">
+            <li data-ng-repeat="task in tasks">
+                {{ task.text }}
+                <button class="btn" id="fancybutton" ng-click="enableEditor(task.text, task.$$hashKey, tasks)">Edit</button>
+                <button class="btn" id="fancybutton" ng-click="deleteTask(task.$$hashKey, tasks)">Delete</button>
+                <br />
+                <br />
+            </li>
+        </ul>
+
+    </div>
+
+
+</body>
+</html>
